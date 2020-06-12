@@ -12,6 +12,7 @@ TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjEzMDY3OTAsIm5iZiI6MT
 EMAIL = 'wolf@thedoor.com'
 PASSWORD = 'huff-puff'
 
+
 @pytest.fixture
 def client():
     os.environ['JWT_SECRET'] = SECRET
@@ -21,13 +22,10 @@ def client():
     yield client
 
 
-
 def test_health(client):
     response = client.get('/')
     assert response.status_code == 200
     assert response.json == 'Healthy'
-    # FIXME - testing codebuild with a "broken" test
-    assert False
 
 
 def test_auth(client):
